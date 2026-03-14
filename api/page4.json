@@ -1,6 +1,6 @@
 {
   "page_number": 4,
-  "image": "images/page4.png",
+  "image": "images/page4.webp",
   "content": "<div class='story-page'><h2>Te Tahi’s Lineage</h2><p><strong>Te Tahi-o-Te-Rā</strong> was no ordinary being.</p><p>He was a <i>mokopuna</i> of <strong>Toroa</strong>, the great <i>rangatira</i> of the Mātaatua waka, and the son of <strong>Ruaihona</strong>.</p><p>He grew to become a <i>tohunga</i> of immense power—</p><div class='attributes'><span>A healer...</span><span>A protector...</span><span>And sometimes… someone to fear.</span></div></div>",
   "next_page": "api/page5.json",
   "previous_page": "api/page3.json"

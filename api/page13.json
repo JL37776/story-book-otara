@@ -1,6 +1,6 @@
 {
   "page_number": 13,
-  "image": "images/page13.png",
+  "image": "images/page13.webp",
   "content": "<div class='story-page'><h2>Te Tahi Today</h2><p>Even today, the people say:</p><div class='legend-box'><p>If one of his descendants is lost at sea,</p><p>if the waves grow rough,</p><p>if danger approaches—</p></div><p><strong>Te Tahi</strong> or <strong>Tūtarakauika</strong> will come.</p><p>They will lift the person from the ocean, carry them safely to shore, and protect them just as they once protected the <i>tohunga</i> of old.</p></div>",
   "next_page": "api/page14.json",
   "previous_page": "api/page12.json"

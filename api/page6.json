@@ -1,6 +1,6 @@
 {
   "page_number": 6,
-  "image": "images/page6.png",
+  "image": "images/page6.webp",
   "content": "<div class='story-page'><h2>Fear Among His People</h2><p>But as Te Tahi grew older, his <i>mana</i> grew even stronger.</p><p>And sometimes, when people do not understand great power, <strong>fear begins to grow too.</strong></p><div class='whisper-box'><p>Quiet meetings were held.</p><p>Whispers travelled in the night.</p></div><p>Until the people reached a hard decision…</p><p class='cliffhanger'>They must leave Te Tahi behind.</p></div>",
   "next_page": "api/page7.json",
   "previous_page": "api/page5.json"
