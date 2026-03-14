@@ -1,6 +1,6 @@
 /* --- Root & Layout --- */
 body {
-    background-color: #eaddca; /* Warna meja kayu lembut */
+    background-color: #eaddca;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
@@ -18,7 +18,7 @@ body {
         "header header header header" 
         "turn-left page-left page-right turn-right" 
         "footer footer footer footer";
-    perspective: 2500px; /* Penting untuk efek 3D flip */
+    perspective: 2500px;
     position: relative;
 }
 
@@ -56,7 +56,6 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
     position: relative;
-    /* Mendukung animasi 3D */
     transform-style: preserve-3d;
     backface-visibility: hidden;
     box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
@@ -242,8 +241,6 @@ body {
     font-size: 1.1em;
     font-weight: bold;
     cursor: pointer;
-    
-    /* Animasi Transisi */
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     outline: none;
