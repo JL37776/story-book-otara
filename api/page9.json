@@ -1,0 +1,7 @@
+{
+  "page_number": 9,
+  "image": "images/page9.png",
+  "content": "<div class='story-page'><h2>Calling the Sea</h2><p>Standing alone on the shore, Te Tahi lifted his hands to the sky.</p><p>He called upon <strong>Tangaroa</strong>, upon the <i>taniwha</i> of the deep, upon the ancient creatures of the ocean.</p><div class='thunder-text'><p>His voice rolled across the waves like thunder.</p></div><p>And from the darkness of the sea rose a mighty figure—</p><div class='whale-arrival'><h3>Tūtarakauika</h3><p>the chief of whales</p></div></div>",
+  "next_page": "api/page10.json",
+  "previous_page": "api/page8.json"
+}

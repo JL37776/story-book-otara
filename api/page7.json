@@ -1,0 +1,7 @@
+{
+  "page_number": 7,
+  "image": "images/page7.png",
+  "content": "<div class='story-page'><h2>The Journey to Whakaari</h2><p>One summer day, the <i>iwi</i> prepared to travel to <strong>Whakaari</strong>, the island of steaming cliffs and nesting <i>tītī</i>.</p><p>They loaded their <i>waka</i> with <i>kai</i> and precious water, and then they invited Te Tahi to join them—to lead the <i>karakia</i> for a plentiful harvest.</p><div class='trust-moment'><p>Trusting them,</p><h3>he accepted.</h3></div></div>",
+  "next_page": "api/page8.json",
+  "previous_page": "api/page6.json"
+}

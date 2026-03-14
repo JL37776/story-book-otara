@@ -1,0 +1,7 @@
+{
+  "page_number": 3,
+  "image": "images/page3.png",
+  "content": "<div class='story-page'><h2>Feeding the Guardian</h2><p>The <i>kuia</i> of Ngāti Ngahere would walk to the water’s edge carrying small baskets of <i>kai</i>.</p><p>They would toss the food gently into the cave’s mouth.</p><div class='dialogue'><p>“Noho ora, e Te Tahi,” they whispered.</p><p class='translation'>Be well, Te Tahi.</p></div><p>Some said it was a gift.</p><p>Some said it was a sign of respect.</p><p>And some said it was simply the way things had always been.</p></div>",
+  "next_page": "api/page4.json",
+  "previous_page": "api/page2.json"
+}

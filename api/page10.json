@@ -1,0 +1,7 @@
+{
+  "page_number": 10,
+  "image": "images/page10.png",
+  "content": "<div class='story-page'><h2>The Great Journey Home</h2><p>Tūtarakauika glided toward the shore, his massive body breaking through the waves.</p><p>Te Tahi climbed onto his back.</p><p>With a powerful sweep of his tail, the great whale turned toward <strong>Whakatāne</strong>.</p><div class='speed-box'><p>They travelled fast—</p><p class='fast'>so fast that the sea frothed behind them</p></div><p>...and the red hulls of the people’s <i>waka</i> could be seen drifting far in the distance.</p></div>",
+  "next_page": "api/page11.json",
+  "previous_page": "api/page9.json"
+}

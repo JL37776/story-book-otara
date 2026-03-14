@@ -1,0 +1,7 @@
+{
+  "page_number": 5,
+  "image": "images/page5.png",
+  "content": "<div class='story-page'><h2>The Sacred Rock</h2><p>Near his home stood a tall and jagged rock, rising high above the water like a guardian watching over the valley.</p><p>This was <strong>Te Toka-a-Houmea</strong>.</p><p><i>Harakeke</i> grew from its sides, made sacred by Te Tahi’s rituals.</p><div class='sacred-list'><p>It was here he performed <i>karakia</i>,</p><p>here he offered prayers to ancient <i>atua</i>,</p><p>here he held the weight of his <i>mana</i>.</p></div></div>",
+  "next_page": "api/page6.json",
+  "previous_page": "api/page4.json"
+}

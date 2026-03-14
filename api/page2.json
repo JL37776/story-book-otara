@@ -1,0 +1,7 @@
+{
+  "page_number": 2,
+  "image": "images/page2.png",
+  "content": "<div class='story-page'><h2>The Valley of Ōtara</h2><p>In the quiet valley of Ōtara, where mist curls like soft <i>korowai</i> around the hills, there lived a taniwha named <strong>Te Tahi-o-Te-Rā</strong>.</p><p>His home was a hidden cave beneath the shimmering waters, a place known to the people as <i>Te Ana-o-Te Tahi</i>.</p><p>The children of the valley loved to swim near the cave—but only when the water was clear.</p><p>For everyone knew: when the water glowed gold like <i>koura</i>, Te Tahi had returned, and it was time to leave the river in peace.</p></div>",
+  "next_page": "api/page3.json",
+  "previous_page": "api/page1.json"
+}

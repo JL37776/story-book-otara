@@ -1,0 +1,7 @@
+{
+  "page_number": 1,
+  "image": "images/page1.png",
+  "content": "<div class='cover-wrapper'><h3>Te Tahi-o-Te-Rā:</h3><h1>The Guardian of Ōtara</h1><p class='subtitle'>A Children’s Book Inspired by the Pūrākau of Ngāti Ngahere</p><hr><p class='author'>Nā Te Kāhautu Maxwell</p><p class='reteller'>Retold in story form for tamariki and rangatahi</p></div>",
+  "next_page": "api/page2.json",
+  "previous_page": null
+}
