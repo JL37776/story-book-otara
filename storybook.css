@@ -53,7 +53,6 @@ body {
     display: flex; 
     justify-content: center; 
     align-items: center;
-    cursor: pointer;
     transition: background-color 0.3s;
     position: relative;
     transform-style: preserve-3d;

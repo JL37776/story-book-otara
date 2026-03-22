@@ -57,6 +57,7 @@ window.addEventListener("load", function () {
     leftPageDiv.innerHTML = "";
     leftPageDiv.appendChild(imgElement);
 
+    updateCursor();
   }
 
   function previous_page() {
@@ -103,6 +104,32 @@ window.addEventListener("load", function () {
             isAnimating = false; // Reset flag
         }, 800);
     }
+}
+
+function updateCursor() {
+  const leftPage = document.querySelector("#page-left");
+  const rightPage = document.querySelector("#page-right");
+
+  const page = currentPageInfo.page_number;
+
+  // Reset
+  leftPage.style.cursor = "auto";
+  rightPage.style.cursor = "auto";
+
+  // Page 1 only right
+  if (page === 1) {
+    rightPage.style.cursor = "e-resize";
+  }
+
+  // last page only left
+  else if (page === totalPageCount) {
+    leftPage.style.cursor = "w-resize";
+  }
+
+  else {
+    leftPage.style.cursor = "w-resize";
+    rightPage.style.cursor = "e-resize";
+  }
 }
 
 });
