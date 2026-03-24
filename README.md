@@ -155,4 +155,77 @@ If needed, update your fork:
 git push origin main
 ```
 
+---
 
+# AI Sprite Interactive System
+
+An LLM-powered interactive companion layer built on top of the storybook, using the **Groq API** (LLaMA / Gemma / Mixtral models). All sprite features are located in the `sprite/` folder and injected dynamically — zero changes to the original storybook HTML structure.
+
+## Architecture
+
+```
+sprite/
+├── config.js       # Groq API configuration (key, model, parameters)
+├── agents.js       # 6 specialized LLM agent prompts
+├── llm-client.js   # Groq API communication client
+├── sprite.js       # Main BookSprite class (pet, bubble, BGM, progress)
+├── buddy.js        # BuddySprite class (Moko emotional companion)
+└── sprite.css      # All sprite UI styles & animations
+```
+
+## Features
+
+### 🦉 Kiri — The Owl Spirit (Top-Right)
+
+- **Delayed lightbulb**: 3 seconds after each page turn, a glowing 💡 appears, then auto-triggers after 1.5s
+- **Dual-tab bubble dialog**:
+  - **📚 I wanna know...** — Extracts Māori cultural terms (words, place names, concepts) from the current page. Click a term card to expand its child-friendly explanation (+1 ⭐ per new term viewed)
+  - **💭 Let me think...** — Generates one inspirational question + 3 candidate answers. Selecting the best answer awards +2 ⭐. All answers receive warm, encouraging feedback (no harsh "wrong" — uses yellow/orange for non-best choices)
+- **Toggle on click**: Clicking Kiri collapses/expands the bubble without reloading content
+- **Settings panel** (⚙️): Configure API key and switch between models at runtime
+
+### 😊 Moko — The Taniwha Buddy (Bottom-Left)
+
+- **4 emotional states**: 😊 happy, 🤩 excited, 😯 confused, 🥺 sad
+- **Page-turn reaction**: 1.5s after each page turn, Moko reads the story content and reacts with a matching emotion + cute one-liner (e.g., *"Waaah, the valley sounds so beautiful! ✨"*)
+- **Answer reaction**: After the reader selects a quiz answer, Moko responds with encouragement — always positive regardless of choice
+
+### 🗺️ Progress Tracker (Top-Left)
+
+- **Travel progress bar**: Advances by 1 for each new page visited (no duplicates). Shows `X / 14` with animated gradient fill + shimmer effect
+- **⭐ Te Tahi Star Leaderboard**: Cumulative score
+  - +1 ⭐ for each culture term first viewed
+  - +2 ⭐ for each correct quiz answer
+  - **Flying star animation**: Stars fly from the click source to the counter with a curved trajectory, followed by a pop effect on the counter
+  - **Bingo sound effect**: `bgm/bingo.mp3` plays on every star award
+
+### 🎵 BGM System (Bottom-Left)
+
+- **Auto-play on load**: Music starts automatically (falls back to first user interaction if blocked by browser autoplay policy)
+- **Random shuffle**: Reads track list from `bgm/index.json`, shuffles with Fisher-Yates, re-shuffles after each full cycle
+- **Toggle button** (🔊/🔇): Click to pause/resume
+
+### LLM Agents
+
+| Agent | Role |
+|-------|------|
+| `questionGenerator` | Generates 1 inspirational, positively-guiding question per page |
+| `answerGenerator` | Produces 3 thoughtful candidate answers (1 best + 2 reasonable) |
+| `commentator` | Gives warm, culturally-enriched feedback on the reader's choice |
+| `cultureExtractor` | Extracts 1–4 Māori cultural terms with child-friendly explanations |
+| `reactor` | Moko's emotional page-turn reaction (emotion + cute sentence) |
+| `answerReactor` | Moko's encouraging post-answer reaction (always positive) |
+
+## Adding BGM Tracks
+
+1. Place `.mp3` files in the `bgm/` folder
+2. Add the file path to `bgm/index.json`:
+
+```json
+[
+  "bgm/08 Spikeroog.mp3",
+  "bgm/your-new-track.mp3"
+]
+```
+
+Tracks will be shuffled and looped automatically.

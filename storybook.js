@@ -58,6 +58,14 @@ window.addEventListener("load", function () {
     leftPageDiv.appendChild(imgElement);
 
     updateCursor();
+
+    // Notify sprite that the page has changed
+    document.dispatchEvent(new CustomEvent("sprite:pageChanged", {
+      detail: {
+        pageNumber: currentPageInfo.page_number,
+        totalPages: totalPageCount,
+      }
+    }));
   }
 
   function previous_page() {

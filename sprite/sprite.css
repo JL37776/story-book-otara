@@ -1,0 +1,784 @@
+/* ==============================
+   Book Sprite - Pet & Quiz Styles
+   ============================== */
+
+/* --- Hidden utility --- */
+.sprite-hidden {
+  display: none !important;
+}
+
+/* ============================
+   Progress Tracker (top-left)
+   ============================ */
+#sprite-tracker {
+  position: fixed;
+  top: 16px;
+  left: 20px;
+  z-index: 10000;
+  background: linear-gradient(135deg, #fffdf5, #f5efe6);
+  border: 2px solid #d4a06a;
+  border-radius: 14px;
+  padding: 10px 16px;
+  box-shadow: 0 4px 18px rgba(139, 69, 19, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.tracker-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tracker-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.tracker-label {
+  font-size: 0.76em;
+  font-weight: 700;
+  color: #8B4513;
+  min-width: 42px;
+}
+
+/* Progress bar */
+.tracker-bar-wrap {
+  flex: 1;
+  height: 12px;
+  background: #e8dcc8;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.tracker-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #e69656, #ff9800, #ffb74d);
+  border-radius: 6px;
+  transition: width 0.6s ease-out;
+  position: relative;
+}
+
+.tracker-bar-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  animation: trackerShimmer 2s infinite;
+}
+
+@keyframes trackerShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.tracker-bar-text {
+  font-size: 0.72em;
+  font-weight: 600;
+  color: #5d2e0a;
+  min-width: 44px;
+  text-align: right;
+}
+
+/* Star counter */
+.tracker-stars-value {
+  font-size: 1.1em;
+  font-weight: 800;
+  color: #e69656;
+  min-width: 30px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.tracker-stars-value.tracker-stars-pop {
+  animation: trackerStarPop 0.4s ease-out;
+}
+
+@keyframes trackerStarPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.6); color: #ff6f00; }
+  100% { transform: scale(1); }
+}
+
+/* ============================
+   Flying Star (animation)
+   ============================ */
+.flying-star {
+  position: fixed;
+  font-size: 24px;
+  z-index: 99999;
+  pointer-events: none;
+  transition: left 0.65s cubic-bezier(0.2, 0.8, 0.3, 1),
+              top 0.65s cubic-bezier(0.2, 0.8, 0.3, 1),
+              opacity 0.65s ease-in,
+              transform 0.65s ease-in;
+  filter: drop-shadow(0 0 6px rgba(255, 180, 0, 0.6));
+}
+
+/* ============================
+   Pet Character (top-right)
+   ============================ */
+#sprite-pet {
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10000;
+  user-select: none;
+}
+
+#sprite-pet-body {
+  width: 64px;
+  height: 64px;
+  font-size: 40px;
+  background: radial-gradient(circle, #fff8ee, #f5e6d0);
+  border: 3px solid #d4a06a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(139, 69, 19, 0.25);
+  animation: spriteFloat 3s ease-in-out infinite;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#sprite-pet-body:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 24px rgba(139, 69, 19, 0.4);
+}
+
+/* Pet states */
+#sprite-pet-body.sprite-pet-thinking {
+  animation: spriteWobble 0.6s ease-in-out infinite;
+}
+
+#sprite-pet-body.sprite-pet-happy {
+  animation: spriteJump 0.5s ease-in-out;
+}
+
+#sprite-pet-name {
+  margin-top: 4px;
+  font-size: 0.72em;
+  font-weight: 700;
+  color: #8B4513;
+  font-family: 'Georgia', serif;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+#sprite-settings-toggle {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #d4a06a;
+  background: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  transition: transform 0.2s;
+}
+
+#sprite-settings-toggle:hover {
+  transform: scale(1.15) rotate(45deg);
+}
+
+/* ============================
+   Lightbulb (hint)
+   ============================ */
+#sprite-bulb {
+  position: fixed;
+  top: 22px;
+  right: 100px;
+  font-size: 36px;
+  z-index: 10001;
+  cursor: pointer;
+  user-select: none;
+  filter: drop-shadow(0 0 0px transparent);
+  transition: filter 0.3s;
+}
+
+#sprite-bulb.sprite-bulb-glow {
+  animation: spriteBulbGlow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes spriteBulbGlow {
+  0% {
+    filter: drop-shadow(0 0 6px rgba(255, 200, 50, 0.3));
+    transform: scale(1) rotate(-5deg);
+  }
+  100% {
+    filter: drop-shadow(0 0 22px rgba(255, 200, 50, 0.9)) drop-shadow(0 0 40px rgba(255, 180, 0, 0.4));
+    transform: scale(1.2) rotate(5deg);
+  }
+}
+
+/* ============================
+   BGM Button (bottom-left music control)
+   ============================ */
+#sprite-bgm-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #d4a06a;
+  background: radial-gradient(circle, #fff8ee, #f5e6d0);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px rgba(139, 69, 19, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 0;
+}
+
+#sprite-bgm-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(139, 69, 19, 0.35);
+}
+
+#sprite-bgm-btn.sprite-bgm-playing {
+  border-color: #4caf50;
+  animation: spriteBgmPulse 2s ease-in-out infinite;
+}
+
+@keyframes spriteBgmPulse {
+  0%, 100% { box-shadow: 0 3px 12px rgba(76, 175, 80, 0.2); }
+  50% { box-shadow: 0 3px 20px rgba(76, 175, 80, 0.5); }
+}
+
+/* ============================
+   Settings Panel
+   ============================ */
+#sprite-settings {
+  position: fixed;
+  top: 90px;
+  right: 24px;
+  width: 280px;
+  background: #fffdf5;
+  border: 2px solid #d4a06a;
+  border-radius: 14px;
+  padding: 16px;
+  z-index: 10001;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#sprite-settings label {
+  font-size: 0.82em;
+  color: #5d2e0a;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#sprite-settings input,
+#sprite-settings select {
+  padding: 7px 10px;
+  border: 1px solid #d5c4a1;
+  border-radius: 8px;
+  font-size: 0.88em;
+  background: #fff;
+  outline: none;
+}
+
+#sprite-settings input:focus,
+#sprite-settings select:focus {
+  border-color: #e69656;
+  box-shadow: 0 0 0 2px rgba(230,150,86,0.2);
+}
+
+#sprite-save-settings {
+  align-self: flex-end;
+  padding: 7px 20px;
+  background: linear-gradient(135deg, #e69656, #8B4513);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.85em;
+  transition: background 0.2s, transform 0.15s;
+}
+
+#sprite-save-settings:hover {
+  transform: scale(1.04);
+  background: linear-gradient(135deg, #d4894c, #5D2E0A);
+}
+
+/* ============================
+   Bubble (dialog bubble)
+   ============================ */
+#sprite-bubble {
+  position: fixed;
+  top: 90px;
+  right: 24px;
+  width: 380px;
+  max-height: 520px;
+  background: #fffdf5;
+  border: 2px solid #d4a06a;
+  border-radius: 18px;
+  padding: 0;
+  z-index: 9999;
+  box-shadow: 0 8px 36px rgba(139, 69, 19, 0.2);
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bubble top arrow */
+#sprite-bubble::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 30px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #d4a06a;
+}
+
+/* --- Tab Bar --- */
+.sprite-tabs {
+  display: flex;
+  border-bottom: 2px solid #e8dcc8;
+  background: #f9f3ea;
+  border-radius: 18px 18px 0 0;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sprite-tab {
+  flex: 1;
+  padding: 10px 8px;
+  border: none;
+  background: transparent;
+  font-size: 0.78em;
+  font-weight: 600;
+  color: #8B4513;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.sprite-tab:hover {
+  background: #f0e6d6;
+}
+
+.sprite-tab.sprite-tab-active {
+  background: #fffdf5;
+  color: #5d2e0a;
+  border-bottom: 2px solid #e69656;
+  margin-bottom: -2px;
+}
+
+/* --- Tab Panel --- */
+.sprite-tab-panel {
+  padding: 14px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 420px;
+}
+
+/* --- Culture Cards --- */
+.sprite-culture-card {
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #fff8ee, #f5efe6);
+  border: 1.5px solid #d5c4a1;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sprite-culture-card:hover {
+  border-color: #e69656;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+}
+
+.sprite-culture-card.sprite-culture-open {
+  border-color: #e69656;
+  background: linear-gradient(135deg, #fef8ee, #fcecd4);
+}
+
+.sprite-culture-term {
+  font-size: 0.88em;
+  font-weight: 700;
+  color: #5d2e0a;
+  line-height: 1.4;
+}
+
+.sprite-culture-card.sprite-culture-open .sprite-culture-term::after {
+  content: " ▾";
+  font-size: 0.8em;
+  color: #e69656;
+}
+
+.sprite-culture-card:not(.sprite-culture-open) .sprite-culture-term::after {
+  content: " ▸";
+  font-size: 0.8em;
+  color: #bbb;
+}
+
+.sprite-culture-answer {
+  margin-top: 8px;
+  font-size: 0.84em;
+  color: #555;
+  line-height: 1.5;
+  padding-left: 8px;
+  border-left: 2px solid #e69656;
+  animation: spriteSlideIn 0.2s ease-out;
+}
+
+/* --- Labels --- */
+.sprite-label {
+  font-size: 0.8em;
+  font-weight: 700;
+  color: #8B4513;
+  margin-bottom: 2px;
+}
+
+.sprite-q-echo {
+  font-size: 0.88em;
+  color: #5d2e0a;
+  background: #f5efe6;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border-left: 3px solid #e69656;
+  line-height: 1.4;
+}
+
+.sprite-plain {
+  font-size: 0.88em;
+  color: #5d2e0a;
+  line-height: 1.5;
+}
+
+/* --- Question Buttons --- */
+.sprite-question-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #fff8ee, #f5efe6);
+  border: 1.5px solid #d5c4a1;
+  border-radius: 12px;
+  font-size: 0.85em;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+
+.sprite-question-btn:hover {
+  background: linear-gradient(135deg, #fcecd4, #f5e0c4);
+  border-color: #e69656;
+  transform: translateX(3px);
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.12);
+}
+
+/* --- Answer Buttons --- */
+.sprite-answer-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1.5px solid #c4d5a1;
+  border-radius: 10px;
+  font-size: 0.84em;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+
+.sprite-answer-btn:hover:not(:disabled) {
+  background: #f0f8e0;
+  border-color: #8cb040;
+  transform: translateX(3px);
+}
+
+.sprite-answer-btn:disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.sprite-answer-correct {
+  background: #e6f9e6 !important;
+  border-color: #4caf50 !important;
+  color: #2e7d32 !important;
+  font-weight: 600;
+}
+
+.sprite-answer-correct::before {
+  content: "✅ ";
+}
+
+.sprite-answer-wrong {
+  background: #fff8e1 !important;
+  border-color: #ffb74d !important;
+  color: #e65100 !important;
+}
+
+.sprite-answer-wrong::before {
+  content: "💭 ";
+}
+
+/* --- Comment --- */
+.sprite-comment {
+  font-size: 0.85em;
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-top: 4px;
+  animation: spriteSlideIn 0.3s ease-out;
+}
+
+.sprite-comment-correct {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  color: #2e7d32;
+  border-left: 3px solid #4caf50;
+}
+
+.sprite-comment-wrong {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  color: #e65100;
+  border-left: 3px solid #ff9800;
+}
+
+/* --- Loading --- */
+.sprite-loading {
+  font-size: 0.84em;
+  color: #999;
+  font-style: italic;
+  padding: 6px 0;
+}
+
+.sprite-loading::after {
+  content: "";
+  animation: spriteDots 1.2s infinite;
+}
+
+/* --- Error --- */
+.sprite-error {
+  font-size: 0.84em;
+  color: #c62828;
+  background: #fde8e8;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+/* --- Next Button --- */
+.sprite-next-btn {
+  align-self: center;
+  margin-top: 6px;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #e69656, #8B4513);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.84em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 3px 10px rgba(139, 69, 19, 0.2);
+}
+
+.sprite-next-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 5px 16px rgba(139, 69, 19, 0.35);
+}
+
+/* ============================
+   Animations
+   ============================ */
+@keyframes spriteFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes spriteWobble {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+@keyframes spriteJump {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-16px) scale(1.1); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes spriteSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spriteBounceIn {
+  0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+  60% { transform: scale(1.03) translateY(-3px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes spriteDots {
+  0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+}
+
+.sprite-bounce-in {
+  animation: spriteBounceIn 0.4s ease-out;
+}
+
+/* --- Scrollbar --- */
+#sprite-bubble::-webkit-scrollbar {
+  width: 5px;
+}
+
+#sprite-bubble::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#sprite-bubble::-webkit-scrollbar-thumb {
+  background: #d5c4a1;
+  border-radius: 10px;
+}
+
+/* ============================
+   Buddy Sprite — Moko (bottom-left)
+   ============================ */
+#buddy-sprite {
+  position: fixed;
+  bottom: 20px;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10000;
+  user-select: none;
+}
+
+#buddy-face {
+  width: 60px;
+  height: 60px;
+  font-size: 36px;
+  background: radial-gradient(circle, #eef7ff, #d6ecff);
+  border: 3px solid #4caf50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.2);
+  animation: buddyIdle 3.5s ease-in-out infinite;
+  transition: border-color 0.4s;
+}
+
+#buddy-name {
+  margin-top: 3px;
+  font-size: 0.7em;
+  font-weight: 700;
+  color: #1565c0;
+  font-family: 'Georgia', serif;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+
+/* Speech bubble */
+#buddy-speech {
+  position: absolute;
+  bottom: 76px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 160px;
+  max-width: 240px;
+  background: #fffdf5;
+  border: 2px solid #90caf9;
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 0.82em;
+  color: #333;
+  line-height: 1.45;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(33, 150, 243, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Speech bubble bottom arrow */
+#buddy-speech::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 9px solid #90caf9;
+}
+
+#buddy-speech.buddy-hidden {
+  display: none;
+}
+
+#buddy-speech.buddy-speech-in {
+  animation: buddySpeechPop 0.35s ease-out;
+}
+
+/* --- Buddy Animations --- */
+@keyframes buddyIdle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  30% { transform: translateY(-4px) rotate(-2deg); }
+  70% { transform: translateY(-2px) rotate(2deg); }
+}
+
+@keyframes buddyBounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.25) rotate(-6deg); }
+  60% { transform: scale(0.95) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes buddySpeechPop {
+  0% { opacity: 0; transform: translateX(-50%) scale(0.7) translateY(8px); }
+  60% { transform: translateX(-50%) scale(1.04) translateY(-2px); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); }
+}
+
+#buddy-face.buddy-bounce {
+  animation: buddyBounce 0.5s ease-in-out;
+}
+
