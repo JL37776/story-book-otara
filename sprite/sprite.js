@@ -171,7 +171,7 @@ class BookSprite {
     this.updateTracker();
 
     // Play bingo sound effect
-    const bingo = new Audio("bgm/bingo.mp3");
+    const bingo = new Audio(encodeURI("bgm/bingo.mp3"));
     bingo.volume = 0.5;
     bingo.play().catch(() => {});
 
@@ -480,7 +480,7 @@ class BookSprite {
           [this.bgmTracks[i], this.bgmTracks[j]] = [this.bgmTracks[j], this.bgmTracks[i]];
         }
         this.bgmCurrentIndex = 0;
-        this.bgmAudio.src = this.bgmTracks[0];
+        this.bgmAudio.src = encodeURI(this.bgmTracks[0]);
         this.bgmAudio.addEventListener("ended", () => {
           this.bgmCurrentIndex = (this.bgmCurrentIndex + 1) % this.bgmTracks.length;
           if (this.bgmCurrentIndex === 0) {
@@ -489,7 +489,7 @@ class BookSprite {
               [this.bgmTracks[i], this.bgmTracks[j]] = [this.bgmTracks[j], this.bgmTracks[i]];
             }
           }
-          this.bgmAudio.src = this.bgmTracks[this.bgmCurrentIndex];
+          this.bgmAudio.src = encodeURI(this.bgmTracks[this.bgmCurrentIndex]);
           this.bgmAudio.play();
         });
         this.startBGM();
@@ -504,6 +504,9 @@ class BookSprite {
       btn.innerHTML = "🔊";
       btn.classList.add("sprite-bgm-playing");
     }).catch(() => {
+      // Autoplay blocked — wait for any user interaction to resume
+      btn.innerHTML = "🔊";
+      btn.classList.add("sprite-bgm-playing");
       const resume = () => {
         if (!this.bgmPlaying) return;
         this.bgmAudio.play().then(() => {
@@ -512,9 +515,11 @@ class BookSprite {
         }).catch(() => {});
         document.removeEventListener("click", resume);
         document.removeEventListener("keydown", resume);
+        document.removeEventListener("touchstart", resume);
       };
-      document.addEventListener("click", resume);
-      document.addEventListener("keydown", resume);
+      document.addEventListener("click", resume, { once: true });
+      document.addEventListener("keydown", resume, { once: true });
+      document.addEventListener("touchstart", resume, { once: true });
     });
   }
 
