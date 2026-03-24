@@ -257,10 +257,10 @@ body {
 }
 
 /* ============================
-   Mobile Responsive Layout
+   Mobile Responsive Layout (DISABLED — all blocks commented out)
    ============================ */
 
-/* Tablet (< 1100px) */
+/* [MOBILE DISABLED] Tablet (< 1100px)
 @media screen and (max-width: 1100px) {
   .grid-container {
     grid-template-columns: 20px 1fr 1fr 20px;
@@ -276,8 +276,9 @@ body {
     font-size: 2em;
   }
 }
+[END MOBILE DISABLED] */
 
-/* Mobile (< 768px) — single column, stacked pages */
+/* [MOBILE DISABLED] Mobile (< 768px) — single column, stacked pages
 @media screen and (max-width: 768px) {
   body {
     align-items: flex-start;
@@ -351,8 +352,9 @@ body {
     margin: 10px 0;
   }
 }
+[END MOBILE DISABLED] */
 
-/* Small phone (< 480px) */
+/* [MOBILE DISABLED] Small phone (< 480px)
 @media screen and (max-width: 480px) {
   .grid-container {
     grid-template-columns: 18px 1fr 18px;
@@ -378,3 +380,4 @@ body {
     font-size: 0.85em;
   }
 }
+[END MOBILE DISABLED] */

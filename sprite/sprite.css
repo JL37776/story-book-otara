@@ -783,20 +783,20 @@
 }
 
 /* ============================
-   Mobile Responsive — Sprite UI
+   Mobile Responsive — Sprite UI (DISABLED — all blocks commented out)
    ============================ */
 
-/* Tablet (< 1100px) */
+/* [MOBILE DISABLED] Tablet (< 1100px)
 @media screen and (max-width: 1100px) {
   #sprite-bubble {
     width: 320px;
   }
 }
+[END MOBILE DISABLED] */
 
-/* Mobile (< 768px) */
+/* [MOBILE DISABLED] Mobile (< 768px)
 @media screen and (max-width: 768px) {
 
-  /* --- Progress Tracker: shrink & reposition --- */
   #sprite-tracker {
     top: 8px;
     left: 8px;
@@ -811,7 +811,6 @@
   .tracker-bar-text { font-size: 0.62em; min-width: 36px; }
   .tracker-stars-value { font-size: 0.9em; }
 
-  /* --- Pet: smaller, closer to edge --- */
   #sprite-pet {
     top: 8px;
     right: 8px;
@@ -835,14 +834,12 @@
     right: -4px;
   }
 
-  /* --- Lightbulb: reposition --- */
   #sprite-bulb {
     top: 14px;
     right: 66px;
     font-size: 28px;
   }
 
-  /* --- Bubble: full-width bottom sheet on mobile --- */
   #sprite-bubble {
     position: fixed;
     top: auto;
@@ -874,7 +871,6 @@
     max-height: 42vh;
   }
 
-  /* --- Settings panel: full width bottom --- */
   #sprite-settings {
     top: auto;
     bottom: 0;
@@ -885,7 +881,6 @@
     box-sizing: border-box;
   }
 
-  /* --- BGM button: smaller, tighter --- */
   #sprite-bgm-btn {
     bottom: 12px;
     left: 8px;
@@ -894,7 +889,6 @@
     font-size: 16px;
   }
 
-  /* --- Buddy: smaller, repositioned --- */
   #buddy-sprite {
     bottom: 10px;
     left: 52px;
@@ -918,12 +912,10 @@
     bottom: 56px;
   }
 
-  /* --- Flying star: smaller on mobile --- */
   .flying-star {
     font-size: 18px;
   }
 
-  /* --- Answer buttons: bigger touch targets --- */
   .sprite-answer-btn {
     padding: 12px 14px;
     font-size: 0.88em;
@@ -938,8 +930,9 @@
     font-size: 0.88em;
   }
 }
+[END MOBILE DISABLED] */
 
-/* Small phone (< 480px) */
+/* [MOBILE DISABLED] Small phone (< 480px)
 @media screen and (max-width: 480px) {
 
   #sprite-tracker {
@@ -998,3 +991,4 @@
     bottom: 48px;
   }
 }
+[END MOBILE DISABLED] */
