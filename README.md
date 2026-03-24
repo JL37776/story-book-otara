@@ -229,3 +229,23 @@ sprite/
 ```
 
 Tracks will be shuffled and looped automatically.
+
+## Mobile Responsive Layout
+
+The storybook and all sprite UI elements adapt to three breakpoints:
+
+| Breakpoint | Layout |
+|---|---|
+| **≤ 1100px** (Tablet) | Grid columns become fluid `1fr`, page height reduced to 500px, bubble narrows to 320px |
+| **≤ 768px** (Mobile) | Single-column stacked layout — image on top, text below. Bubble becomes a full-width **bottom sheet**. Settings panel also slides up from the bottom. All sprites and buttons shrink for touch |
+| **≤ 480px** (Small phone) | Further reduced sizes for tracker, pet, buddy, BGM button. Smaller tab text and progress bar |
+
+Key mobile adaptations:
+- **Viewport meta tag** added to `index.html` for proper scaling
+- **Kiri bubble** → bottom sheet drawer (slides up from bottom edge)
+- **Settings panel** → full-width bottom sheet
+- **Answer buttons / culture cards** → larger touch targets (12px+ padding)
+- **Moko buddy** → 44px → 36px, speech bubble max-width reduced
+- **BGM button** → 36px → 32px, closer to edge
+- **Progress tracker** → compact layout with smaller bar and text
+

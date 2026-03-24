@@ -782,3 +782,219 @@
   animation: buddyBounce 0.5s ease-in-out;
 }
 
+/* ============================
+   Mobile Responsive — Sprite UI
+   ============================ */
+
+/* Tablet (< 1100px) */
+@media screen and (max-width: 1100px) {
+  #sprite-bubble {
+    width: 320px;
+  }
+}
+
+/* Mobile (< 768px) */
+@media screen and (max-width: 768px) {
+
+  /* --- Progress Tracker: shrink & reposition --- */
+  #sprite-tracker {
+    top: 8px;
+    left: 8px;
+    padding: 6px 10px;
+    min-width: 140px;
+    gap: 5px;
+    border-radius: 10px;
+  }
+
+  .tracker-icon { font-size: 14px; }
+  .tracker-label { font-size: 0.65em; min-width: 32px; }
+  .tracker-bar-text { font-size: 0.62em; min-width: 36px; }
+  .tracker-stars-value { font-size: 0.9em; }
+
+  /* --- Pet: smaller, closer to edge --- */
+  #sprite-pet {
+    top: 8px;
+    right: 8px;
+  }
+
+  #sprite-pet-body {
+    width: 48px;
+    height: 48px;
+    font-size: 28px;
+  }
+
+  #sprite-pet-name {
+    font-size: 0.6em;
+  }
+
+  #sprite-settings-toggle {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    top: -2px;
+    right: -4px;
+  }
+
+  /* --- Lightbulb: reposition --- */
+  #sprite-bulb {
+    top: 14px;
+    right: 66px;
+    font-size: 28px;
+  }
+
+  /* --- Bubble: full-width bottom sheet on mobile --- */
+  #sprite-bubble {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 55vh;
+    border-radius: 18px 18px 0 0;
+    border-bottom: none;
+    box-shadow: 0 -4px 30px rgba(139, 69, 19, 0.2);
+  }
+
+  #sprite-bubble::after {
+    display: none;
+  }
+
+  .sprite-tabs {
+    border-radius: 18px 18px 0 0;
+  }
+
+  .sprite-tab {
+    padding: 12px 8px;
+    font-size: 0.82em;
+  }
+
+  .sprite-tab-panel {
+    padding: 12px;
+    max-height: 42vh;
+  }
+
+  /* --- Settings panel: full width bottom --- */
+  #sprite-settings {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 14px 14px 0 0;
+    box-sizing: border-box;
+  }
+
+  /* --- BGM button: smaller, tighter --- */
+  #sprite-bgm-btn {
+    bottom: 12px;
+    left: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  /* --- Buddy: smaller, repositioned --- */
+  #buddy-sprite {
+    bottom: 10px;
+    left: 52px;
+  }
+
+  #buddy-face {
+    width: 44px;
+    height: 44px;
+    font-size: 26px;
+  }
+
+  #buddy-name {
+    font-size: 0.55em;
+  }
+
+  #buddy-speech {
+    min-width: 120px;
+    max-width: 180px;
+    font-size: 0.75em;
+    padding: 8px 10px;
+    bottom: 56px;
+  }
+
+  /* --- Flying star: smaller on mobile --- */
+  .flying-star {
+    font-size: 18px;
+  }
+
+  /* --- Answer buttons: bigger touch targets --- */
+  .sprite-answer-btn {
+    padding: 12px 14px;
+    font-size: 0.88em;
+  }
+
+  .sprite-culture-card {
+    padding: 12px;
+  }
+
+  .sprite-next-btn {
+    padding: 10px 24px;
+    font-size: 0.88em;
+  }
+}
+
+/* Small phone (< 480px) */
+@media screen and (max-width: 480px) {
+
+  #sprite-tracker {
+    top: 4px;
+    left: 4px;
+    padding: 4px 8px;
+    min-width: 120px;
+  }
+
+  .tracker-label { font-size: 0.58em; }
+  .tracker-bar-wrap { height: 8px; }
+
+  #sprite-pet-body {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  #sprite-bulb {
+    font-size: 22px;
+    right: 54px;
+    top: 10px;
+  }
+
+  #sprite-bubble {
+    max-height: 50vh;
+  }
+
+  .sprite-tab {
+    font-size: 0.72em;
+    padding: 10px 6px;
+  }
+
+  #buddy-face {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+  }
+
+  #buddy-sprite {
+    left: 46px;
+    bottom: 8px;
+  }
+
+  #sprite-bgm-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    bottom: 8px;
+    left: 6px;
+  }
+
+  #buddy-speech {
+    max-width: 150px;
+    font-size: 0.7em;
+    bottom: 48px;
+  }
+}
