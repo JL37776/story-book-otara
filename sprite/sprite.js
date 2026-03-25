@@ -10,6 +10,7 @@ class BookSprite {
     this.currentQuestion = "";
     this.pageChangeTimer = null;
     this.activeTab = "culture";
+    this.prefetchedData = null; // Cache for pre-fetched LLM results
 
     // Progress tracking
     this.travelCurrent = 0;
@@ -128,7 +129,11 @@ class BookSprite {
 
     document.getElementById("sprite-bulb").addEventListener("click", () => {
       this.hideBulb();
-      if (!this.isBusy) this.loadBothTabs();
+      if (this.prefetchedData) {
+        this.showPrefetchedData();
+      } else if (!this.isBusy) {
+        this.loadBothTabs();
+      }
     });
 
     document.querySelectorAll(".sprite-tab").forEach(tab => {
@@ -257,6 +262,7 @@ class BookSprite {
     }
     this.hideBubble();
     this.hideBulb();
+    this.prefetchedData = null;
 
     const ctx = this.getPageContext();
     if (!ctx) return;
@@ -267,9 +273,75 @@ class BookSprite {
       return;
     }
 
+    // Wait 3 seconds, then silently prefetch LLM data in background
     this.pageChangeTimer = setTimeout(() => {
-      this.showBulb();
+      this.prefetchContent(ctx);
     }, 3000);
+  }
+
+  /** Silently fetch LLM data; show lightbulb only on valid results */
+  async prefetchContent(ctx) {
+    if (!ctx || !SpriteConfig.apiKey) return;
+
+    try {
+      const [cultureResult, thinkResult] = await Promise.allSettled([
+        this.llm.generateCultureItems(ctx),
+        this.prefetchThinkData(ctx),
+      ]);
+
+      const cultureItems = cultureResult.status === "fulfilled" ? cultureResult.value : null;
+      const thinkData = thinkResult.status === "fulfilled" ? thinkResult.value : null;
+
+      // Only show lightbulb if at least one tab got valid data
+      const hasCulture = cultureItems && Array.isArray(cultureItems) && cultureItems.length > 0;
+      const hasThink = thinkData && thinkData.question && thinkData.answerData;
+
+      if (hasCulture || hasThink) {
+        this.prefetchedData = { cultureItems, thinkData };
+        this.showBulb();
+      }
+      // If both failed or returned empty — stay silent, no lightbulb, no error shown
+    } catch {
+      // Network error, token exhaustion, etc. — stay completely silent
+    }
+  }
+
+  /** Prefetch question + answers without rendering */
+  async prefetchThinkData(ctx) {
+    const question = await this.llm.generateQuestion(ctx);
+    if (!question) return null;
+    const answerData = await this.llm.generateAnswers(question, ctx);
+    if (!answerData || !answerData.answers || answerData.answers.length === 0) return null;
+    return { question, answerData };
+  }
+
+  /** Display already-prefetched data in the bubble */
+  showPrefetchedData() {
+    if (!this.prefetchedData) return;
+
+    const { cultureItems, thinkData } = this.prefetchedData;
+    this.prefetchedData = null;
+
+    // Render culture tab
+    if (cultureItems && cultureItems.length > 0) {
+      this.renderCultureTab(cultureItems);
+    } else {
+      document.getElementById("sprite-tab-culture").innerHTML =
+        `<div class="sprite-plain">No special Māori words on this page — let's keep reading! 📖</div>`;
+    }
+
+    // Render think tab
+    if (thinkData && thinkData.question && thinkData.answerData) {
+      this.currentQuestion = thinkData.question;
+      this.currentAnswerData = thinkData.answerData;
+      const panel = document.getElementById("sprite-tab-think");
+      this.renderAnswers(panel, thinkData.question, thinkData.answerData);
+    } else {
+      document.getElementById("sprite-tab-think").innerHTML =
+        `<div class="sprite-plain">Nothing to think about here — let's keep reading! 📖</div>`;
+    }
+
+    this.showBubbleEl();
   }
 
   startQuestionFlow() {
@@ -285,10 +357,7 @@ class BookSprite {
     const bulb = document.getElementById("sprite-bulb");
     bulb.classList.remove("sprite-hidden");
     bulb.classList.add("sprite-bulb-glow");
-    this.pageChangeTimer = setTimeout(() => {
-      this.hideBulb();
-      if (!this.isBusy) this.loadBothTabs();
-    }, 1500);
+    // Lightbulb stays visible until reader clicks it or the agent
   }
 
   hideBulb() {
@@ -323,7 +392,7 @@ class BookSprite {
       this.renderCultureTab(cultureResult.value);
     } else {
       document.getElementById("sprite-tab-culture").innerHTML =
-        `<div class="sprite-error">⚠️ ${cultureResult.reason?.message || "Failed to load"}</div>`;
+        `<div class="sprite-plain">No special Māori words on this page — let's keep reading! 📖</div>`;
     }
 
     this.setPetState("idle");
@@ -385,7 +454,7 @@ class BookSprite {
       this.currentAnswerData = data;
       this.renderAnswers(panel, question, data);
     } catch (err) {
-      panel.innerHTML = `<div class="sprite-error">⚠️ ${err.message}</div>`;
+      panel.innerHTML = `<div class="sprite-plain">Nothing to think about here — let's keep reading! 📖</div>`;
     }
   }
 
@@ -435,8 +504,10 @@ class BookSprite {
       commentEl.className = `sprite-comment ${isCorrect ? "sprite-comment-correct" : "sprite-comment-wrong"}`;
       commentEl.textContent = `${isCorrect ? "🎉" : "💡"} ${comment}`;
     } catch (err) {
-      commentEl.className = "sprite-comment sprite-error";
-      commentEl.textContent = `⚠️ ${err.message}`;
+      commentEl.className = `sprite-comment ${isCorrect ? "sprite-comment-correct" : "sprite-comment-wrong"}`;
+      commentEl.textContent = isCorrect
+        ? "🎉 Ka pai! You've got a great eye for the story!"
+        : "💡 That's an interesting thought! Every answer helps us learn more.";
     }
 
     const nextBtn = document.createElement("button");
@@ -565,16 +636,22 @@ class BookSprite {
       // Bubble is visible — collapse it
       this.hideBubble();
     } else {
-      // Bubble is hidden — show it, load content if needed
-      const culturePanel = document.getElementById("sprite-tab-culture");
-      const hasContent = culturePanel.innerHTML.trim().length > 0
-        && !culturePanel.querySelector(".sprite-loading");
-      if (hasContent) {
-        // Already has loaded content, just re-show
-        this.showBubbleEl();
+      // Bubble is hidden — show it
+      this.hideBulb();
+      if (this.prefetchedData) {
+        // Use already-fetched data
+        this.showPrefetchedData();
       } else {
-        // No content yet — trigger loading
-        if (!this.isBusy) this.startQuestionFlow();
+        const culturePanel = document.getElementById("sprite-tab-culture");
+        const hasContent = culturePanel.innerHTML.trim().length > 0
+          && !culturePanel.querySelector(".sprite-loading");
+        if (hasContent) {
+          // Already has loaded content, just re-show
+          this.showBubbleEl();
+        } else {
+          // No content yet — trigger loading
+          if (!this.isBusy) this.startQuestionFlow();
+        }
       }
     }
   }
