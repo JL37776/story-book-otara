@@ -3,6 +3,7 @@ window.addEventListener("load", function () {
   let currentPageInfo;
   let totalPageCount;
   let isAnimating = false;
+  let currentLanguage = "mi";
 
 
   function turnLeftClick() {
@@ -49,7 +50,7 @@ window.addEventListener("load", function () {
     document.querySelector("#current-page").innerText = currentPageInfo.page_number;
 
      let rightPageDiv = document.querySelector("#page-right");
-    rightPageDiv.innerHTML = currentPageInfo.content;
+    rightPageDiv.innerHTML = currentPageInfo.content[currentLanguage];
 
     let imgElement = document.createElement("img");
     imgElement.src = currentPageInfo.image;
@@ -139,5 +140,10 @@ function updateCursor() {
     rightPage.style.cursor = "e-resize";
   }
 }
+
+document.querySelector("#language-toggle").addEventListener("change", (e) => {
+  currentLanguage = e.target.value;
+  updatePageDisplay();
+});
 
 });
