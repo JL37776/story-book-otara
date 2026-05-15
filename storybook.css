@@ -27,8 +27,11 @@ body {
     grid-area: header;
     display: flex;
     justify-content: center;
+    align-items: center;
+    position: relative; /* penting */
     padding-bottom: 10px;
 }
+
 
 .header h1 {
     font-size: 1.2em;
@@ -255,6 +258,28 @@ body {
     transform: scale(0.95);
     background-color: #5D2E0A;
 }
+
+.language-switch {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#language-toggle {    
+  padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid sandybrown;
+    background-color: ivory;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#language-toggle:hover {
+    background-color: #fffdf5;
+}
+
 
 /* ============================
    Mobile Responsive Layout (DISABLED — all blocks commented out)
