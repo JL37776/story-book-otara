@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="sprite/sprite.css">
     <script type="text/javascript" src="storybook.js"></script>
     <script type="text/javascript" src="sprite/config.js"></script>
+    <script type="text/javascript" src="sprite/storage.js"></script>
     <script type="text/javascript" src="sprite/agents.js"></script>
     <script type="text/javascript" src="sprite/llm-client.js"></script>
     <script type="text/javascript" src="sprite/sprite.js"></script>
@@ -15,8 +16,16 @@
 
   </head>
   <body>
-    <div class="grid-container">
-      <div class="header"><h1>Te Tahi-o-Te-Rā: The Guardian of Ōtara</h1></div>
+      <div class="grid-container">
+      <div class="header"><h1>Te Tahi-o-Te-Rā: The Guardian of Ōtara</h1>
+
+          <div class="language-switch">
+            <select id="language-toggle">
+              <option value="mi">Māori</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+      </div>
 
       <div id="page-left" class="page">
         <p>Images here</p>
@@ -32,6 +41,11 @@
       <div class="footer">
         <p>Page &nbsp;<span id="current-page">?</span> / <span
           id="total-page">?</span></p>
+        
+        <div class="page-jump">
+            <select id="page-select"></select>
+          </div>
+
       </div>
     </div>
   </body>

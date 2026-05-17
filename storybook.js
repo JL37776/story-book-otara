@@ -3,6 +3,7 @@ window.addEventListener("load", function () {
   let currentPageInfo;
   let totalPageCount;
   let isAnimating = false;
+  let currentLanguage = "mi";
 
 
   function turnLeftClick() {
@@ -31,6 +32,7 @@ window.addEventListener("load", function () {
     let pageJsonObject = await response.json();
 
     totalPageCount = pageJsonObject.length;
+    populatePageDropdown(pageJsonObject)
 
     await loadPage(pageJsonObject[0]);
   }
@@ -49,7 +51,7 @@ window.addEventListener("load", function () {
     document.querySelector("#current-page").innerText = currentPageInfo.page_number;
 
      let rightPageDiv = document.querySelector("#page-right");
-    rightPageDiv.innerHTML = currentPageInfo.content;
+    rightPageDiv.innerHTML = currentPageInfo.content[currentLanguage];
 
     let imgElement = document.createElement("img");
     imgElement.src = currentPageInfo.image;
@@ -66,6 +68,9 @@ window.addEventListener("load", function () {
         totalPages: totalPageCount,
       }
     }));
+
+    document.querySelector("#page-select").selectedIndex =
+    currentPageInfo.page_number - 1;
   }
 
   function previous_page() {
@@ -139,5 +144,30 @@ function updateCursor() {
     rightPage.style.cursor = "e-resize";
   }
 }
+
+function populatePageDropdown(pages) {
+  const select = document.querySelector("#page-select");
+
+  select.innerHTML = "";
+
+  pages.forEach((pageUrl, index) => {
+    const option = document.createElement("option");
+    option.value = pageUrl;
+    option.textContent = `Page ${index + 1}`;
+    select.appendChild(option);
+  });
+
+  
+  select.addEventListener("change", (e) => {
+    loadPage(e.target.value);
+  });
+}
+
+document.querySelector("#language-toggle").addEventListener("change", (e) => {
+  currentLanguage = e.target.value;
+  updatePageDisplay();
+});
+
+
 
 });
